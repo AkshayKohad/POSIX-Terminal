@@ -61,3 +61,51 @@ To execute a command in the background, append an `&` at the end of the command.
 ```bash
 ls &
 
+### Directory Navigation
+
+This shell supports standard directory navigation using the following commands:
+
+- **cd [directory]**: Change to the specified directory. Supports:
+  - `cd -`: Switch to the previous directory.
+  - `cd ~`: Go to the home directory.
+  - `cd ..`: Move up one directory level.
+
+- **pwd**: Display the current working directory.
+
+### File Management
+
+This shell allows users to manage and view files in directories with the following commands:
+
+- **ls [-a -l] [directory]**: List files in the specified directory. Options:
+  - `-a`: Include hidden files in the listing.
+  - `-l`: Show detailed information, including permissions, owner, size, and modification date.
+  - **Example**: `ls -al` displays a detailed list of all files, including hidden ones, in the current directory.
+
+### Text Output
+
+This shell enables users to print text directly to the console:
+
+- **echo [text]**: Display the specified text. Supports variable interpolation in a Unix-like environment.
+  - **Example**: `echo Hello, World!` outputs "Hello, World!" to the console.
+
+### File Search
+
+This shell provides a search command to locate files in the current directory and subdirectories:
+
+- **search [filename]**: Search for a specific file in the current directory recursively.
+  - **Example**: `search myfile.txt` checks all files and subdirectories in the current directory for `myfile.txt`.
+
+### Process Information
+
+This shell allows users to view information about specific processes:
+
+- **pinfo [pid]**: Display information about a process with a specified `pid`. If no `pid` is provided, it shows the information for the current process.
+  - Information includes process ID, status, memory usage, and executable path.
+  - **Example**: `pinfo 1234` provides details about the process with PID 1234.
+
+### Command History
+
+This shell maintains a history of commands used during the session. The `history` command allows users to retrieve previous commands.
+
+- **history [number]**: Display the last `number` of commands entered. If no number is given, it displays the last 10 commands.
+  - **Example**: `history 5` shows the last five commands entered in the shell.
