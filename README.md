@@ -48,18 +48,7 @@ This project is a **custom shell simulation** implemented in **C++**. It mimics 
 
 - **history [number]**: Display the command history with the last `number` of commands. If no number is provided, the last 10 commands are shown.
 
-### Input/Output Redirection
 
-This shell supports standard input/output redirection using the following symbols:
-- `>`: Redirects standard output to a file. Example: `echo Hello > file.txt`.
-- `>>`: Appends output to an existing file. Example: `echo Hello >> file.txt`.
-- `<`: Redirects standard input from a file. Example: `cat < file.txt`.
-
-### Running Commands in Background
-
-To execute a command in the background, append an `&` at the end of the command. Example:
-```bash
-ls &
 
 ### Directory Navigation
 
@@ -109,3 +98,28 @@ This shell maintains a history of commands used during the session. The `history
 
 - **history [number]**: Display the last `number` of commands entered. If no number is given, it displays the last 10 commands.
   - **Example**: `history 5` shows the last five commands entered in the shell.
+
+### Input/Output Redirection
+
+This shell supports standard input/output redirection using the following symbols:
+- `>`: Redirects standard output to a file. Example: `echo Hello > file.txt`.
+- `>>`: Appends output to an existing file. Example: `echo Hello >> file.txt`.
+- `<`: Redirects standard input from a file. Example: `cat < file.txt`.
+
+### Running Commands in Background
+
+This shell supports running commands in the background by appending an `&` symbol at the end of the command. When a command is executed in the background, the shell immediately returns control to the user, allowing additional commands to be entered while the background command runs independently.
+
+- **Usage**: To run a command in the background, type the command followed by `&`.
+  - **Example**: `ls &` runs the `ls` command in the background and outputs the process ID (PID) for tracking the background task.
+
+In the background command implementation, a **child process** is created using `fork()`. The child process then executes the specified command using `execvp`, while the parent process (shell) continues running without waiting for the child process to complete.
+
+### Running Commands in Foreground
+
+Commands executed without `&` at the end run in the foreground by default. When a command runs in the foreground, the shell waits until the command completes before allowing further input.
+
+- **Usage**: To run a command in the foreground, type the command normally without `&`.
+  - **Example**: `ls` runs the `ls` command in the foreground, and the shell waits until `ls` completes before accepting new input.
+
+In the foreground command implementation, a **child process** is created using `fork()`, and the shell uses `waitpid` to wait for the child process to complete before returning control to the user.
